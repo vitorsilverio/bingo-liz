@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/bingoliz}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASS:postgres}
+    platform: postgres
