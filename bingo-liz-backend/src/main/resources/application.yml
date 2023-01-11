@@ -4,3 +4,6 @@ spring:
     username: ${DB_USER:postgres}
     password: ${DB_PASS:postgres}
     platform: postgres
+
+jwk:
+  secret: ${JWT_SECRET:763979244226452948404D6351655468576D5A7134743777217A25432A462D4A}

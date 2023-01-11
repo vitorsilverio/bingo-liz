@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.UUID;
 @Table(name = "usuario")
 @Getter
 @Setter
-public class Usuario extends EntidadeBase {
+public class Usuario extends EntidadeBase implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
@@ -27,9 +28,42 @@ public class Usuario extends EntidadeBase {
 
     private Boolean ativo;
 
-    @Transient
-    public List<GrantedAuthority> getAuthorities() {
-        //FIXME criar roles
-        return List.of(new SimpleGrantedAuthority("CONVIDADO"));
+    @Enumerated(EnumType.STRING)
+    private UsuarioTipo usuarioTipo;
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(usuarioTipo.name()));
+    }
+
+    @Override
+    public String getPassword() {
+        return senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return nomeUsuario;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return ativo;
     }
 }
