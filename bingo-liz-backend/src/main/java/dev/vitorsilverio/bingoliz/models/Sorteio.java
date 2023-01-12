@@ -19,6 +19,8 @@ public class Sorteio extends EntidadeBase {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    private String titulo;
+
     private Boolean ativo;
 
     @JoinColumn(name = "data_criacao")

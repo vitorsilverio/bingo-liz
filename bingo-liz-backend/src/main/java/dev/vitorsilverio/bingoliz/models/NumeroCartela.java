@@ -1,8 +1,7 @@
 package dev.vitorsilverio.bingoliz.models;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -10,6 +9,9 @@ import java.util.UUID;
 @Table(name = "numero_cartela")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class NumeroCartela extends EntidadeBase{
 
     @Id

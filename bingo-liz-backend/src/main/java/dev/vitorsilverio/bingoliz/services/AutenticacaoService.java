@@ -9,8 +9,11 @@ import dev.vitorsilverio.bingoliz.repositories.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -41,5 +44,9 @@ public class AutenticacaoService {
         return Autenticacao.builder()
                 .token(jwtService.generateToken(usuario))
                 .build();
+    }
+
+    public Optional<Usuario> getUsuarioAtivo() {
+        return usuarioRepository.findByNomeUsuario(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
     }
 }

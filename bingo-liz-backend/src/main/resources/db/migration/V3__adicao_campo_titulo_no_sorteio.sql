@@ -1,0 +1,1 @@
+ALTER TABLE sorteio ADD COLUMN titulo varchar(256) NOT NULL;
