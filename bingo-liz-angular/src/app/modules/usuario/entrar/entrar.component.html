@@ -1,0 +1,19 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Entrar</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-form-field appearance="outline" [ngStyle]="{width: '300px'}">
+          <mat-label>Nome</mat-label>
+          <input matInput [formControl]="form.controls.usuario" type="text" placeholder="Nome"/>
+        </mat-form-field>
+        <mat-form-field appearance="outline" [ngStyle]="{width: '300px'}">
+          <mat-label>Senha</mat-label>
+          <input matInput [formControl]="form.controls.senha" type="password" placeholder="Senha"/>
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button (click)="entrar()" color="primary">Entrar</button>
+    </mat-card-actions>
+    <a mat-button [routerLink]="['/','usuario','registro']" >Novo usuário? Cadastre-se</a>
+</mat-card>

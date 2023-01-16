@@ -1,0 +1,16 @@
+::ng-deep app-entrar{
+  display: flex !important;
+  justify-content: center !important;
+  width: 100vw;
+}
+
+mat-card {
+  max-width: 400px;
+  align-items: center !important;
+}
+
+mat-card-content{
+  display: flex;
+  flex-direction: column;
+}
+
