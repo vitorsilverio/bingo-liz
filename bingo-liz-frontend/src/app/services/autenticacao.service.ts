@@ -30,6 +30,16 @@ export class AutenticaoService {
           }))
   }
 
+  registrar(usuario: UsuarioModel) {
+    return this.http.post<AutenticacaoModel>(`${environment.apiUrl}/auth/registrar`, usuario)
+        .pipe(map(autenticacao => {
+            localStorage.setItem('token', JSON.stringify(autenticacao))
+            this.tokenSubject.next(autenticacao)
+            this.setUsuario(usuario.usuario)
+            return autenticacao
+        }))
+}
+
   logout() {
       localStorage.removeItem('token')
       localStorage.removeItem('usuario')

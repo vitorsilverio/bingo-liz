@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UsuarioModel } from 'src/app/models/usuario.model';
+import { AutenticaoService } from 'src/app/services/autenticacao.service';
+import { matchValidator } from 'src/app/util/form-validators';
 
 interface EntrarForm {
   usuario: FormControl<string>
@@ -16,15 +20,23 @@ export class RegistroComponent {
 
   form: FormGroup<EntrarForm>
 
-  constructor() {
+  constructor(
+    private autenticaoService: AutenticaoService,
+    private router: Router
+    ) {
     this.form = new FormGroup<EntrarForm>({
       usuario: new FormControl<string>('', {nonNullable: true, validators: [Validators.required]}),
-      senha: new FormControl<string>('', {nonNullable: true, validators: [Validators.required]}),
-      repetirSenha: new FormControl<string>('', {nonNullable: true, validators: [Validators.required]})
+      senha: new FormControl<string>('', {nonNullable: true, validators: [Validators.required, matchValidator('repetirSenha', true)]}),
+      repetirSenha: new FormControl<string>('', {nonNullable: true, validators: [Validators.required, matchValidator('senha')]})
     })
   }
 
   cadastrar(){
+    this.autenticaoService.registrar(this.form.value as UsuarioModel).subscribe({
+      next: _ => {
+          this.router.navigate(['/'])
+      }
+    })
 
   }
 
