@@ -1,4 +1,6 @@
-import { HttpClientModule } from '@angular/common/http';
+import { ErroInterceptor } from './interceptors/erro.interceptor';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -27,7 +29,18 @@ import { UsuarioModule } from './modules/usuario/usuario.module';
     MatIconModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErroInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

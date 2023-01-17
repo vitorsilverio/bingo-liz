@@ -1,0 +1,1 @@
+ALTER TABLE usuario ADD COLUMN usuario_tipo varchar(10) NOT NULL;

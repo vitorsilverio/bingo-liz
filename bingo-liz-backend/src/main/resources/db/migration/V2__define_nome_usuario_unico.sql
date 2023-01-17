@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX nome_usuario_index ON usuario (nome_usuario);

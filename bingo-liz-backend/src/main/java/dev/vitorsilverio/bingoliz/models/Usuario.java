@@ -29,6 +29,7 @@ public class Usuario extends EntidadeBase implements UserDetails {
     private Boolean ativo;
 
     @Enumerated(EnumType.STRING)
+    @Column(name="usuario_tipo")
     private UsuarioTipo usuarioTipo;
 
 

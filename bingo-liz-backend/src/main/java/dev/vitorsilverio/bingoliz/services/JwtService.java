@@ -21,7 +21,7 @@ public class JwtService {
 
     private final String secret;
 
-    JwtService(@Value("jwt.secret") String secret){
+    JwtService(@Value("${jwt.secret}") String secret){
         this.secret = secret;
     }
     public String extrairUsuario(String token) {
@@ -50,7 +50,7 @@ public class JwtService {
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + (1000 * 60 * 2)))
-                .signWith(getSignKey(), SignatureAlgorithm.ES256)
+                .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
