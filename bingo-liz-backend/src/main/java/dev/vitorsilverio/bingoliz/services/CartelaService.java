@@ -10,8 +10,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
 @Service
@@ -37,20 +39,19 @@ public class CartelaService {
     }
 
     private void gerarNumerosCartela(Cartela cartela) {
-        var numerosPossiveis = IntStream
+        var numerosPossiveis = new ArrayList<>(IntStream
                 .range(1, 76)
                 .boxed()
-                .toList();
+                .toList());
         Collections.shuffle(numerosPossiveis);
+        final var ordem = new AtomicInteger(1);
         cartela.getNumerosCartela().addAll(numerosPossiveis.stream().limit(24).sorted().map(
-                i -> {
-                    var ordem = 0;
-                    return NumeroCartela.builder()
+                i -> NumeroCartela.builder()
                         .cartela(cartela)
                         .marcado(false)
                         .numero(i)
-                        .ordem(ordem++)
-                        .build(); }
+                        .ordem(ordem.getAndIncrement())
+                        .build()
         ).toList());
     }
 }

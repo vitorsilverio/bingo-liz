@@ -13,10 +13,10 @@
     <mat-form-field appearance="outline" [ngStyle]="{width: '300px'}">
       <mat-label>Senha</mat-label>
       <input matInput [formControl]="form.controls.senha" type="password" placeholder="Senha" />
+      <mat-error *ngIf="form.controls.senha.hasError('required')">
+        Campo obrigatório.
+      </mat-error>
     </mat-form-field>
-    <mat-error *ngIf="form.controls.senha.hasError('required')">
-      Campo obrigatório.
-    </mat-error>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button (click)="entrar()" color="primary" [disabled]="!form.valid">Entrar</button>

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { AutenticacaoModel } from 'src/app/models/autenticacao.model';
 import { UsuarioModel } from 'src/app/models/usuario.model';
 import { environment } from 'src/environments/environment';
@@ -8,19 +8,24 @@ import { environment } from 'src/environments/environment';
 @Injectable({ providedIn: 'root' })
 export class AutenticaoService {
 
-  constructor(private http: HttpClient) {
+  private tokenSubject: BehaviorSubject<AutenticacaoModel>
+  public token: Observable<AutenticacaoModel>
 
+  constructor(private http: HttpClient) {
+    this.tokenSubject = new BehaviorSubject<AutenticacaoModel>(JSON.parse(localStorage.getItem('token')!))
+    this.token = this.tokenSubject.asObservable()
   }
 
   public get autenticacao(): AutenticacaoModel {
-    return JSON.parse(localStorage.getItem('token')!)
+    return this.tokenSubject.getValue()
   }
 
   login(usuario: UsuarioModel) {
       return this.http.post<AutenticacaoModel>(`${environment.apiUrl}/auth/entrar`, usuario)
           .pipe(map(autenticacao => {
               localStorage.setItem('token', JSON.stringify(autenticacao))
-              localStorage.setItem('usuario', usuario.usuario)
+              this.tokenSubject.next(autenticacao)
+              this.setUsuario(usuario.usuario)
               return autenticacao
           }))
   }
@@ -29,7 +34,8 @@ export class AutenticaoService {
     return this.http.post<AutenticacaoModel>(`${environment.apiUrl}/auth/registrar`, usuario)
         .pipe(map(autenticacao => {
             localStorage.setItem('token', JSON.stringify(autenticacao))
-            localStorage.setItem('usuario', usuario.usuario)
+            this.tokenSubject.next(autenticacao)
+            this.setUsuario(usuario.usuario)
             return autenticacao
         }))
 }
@@ -37,6 +43,7 @@ export class AutenticaoService {
   logout() {
       localStorage.removeItem('token')
       localStorage.removeItem('usuario')
+      this.tokenSubject.unsubscribe()
   }
 
   setUsuario(usuario: string){
