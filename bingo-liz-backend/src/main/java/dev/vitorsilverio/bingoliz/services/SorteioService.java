@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,5 +22,9 @@ public class SorteioService {
         sorteio.setDataCriacao(LocalDateTime.now());
         sorteio = sorteioRepository.save(sorteio);
         return new SorteioDto(sorteio.getId(), sorteio.getTitulo());
+    }
+
+    public List<SorteioDto> getSorteiosAtivos() {
+        return sorteioRepository.findByAtivoOrderByDataCriacaoDesc(true).stream().map(s -> new SorteioDto(s.getId(), s.getTitulo())).toList();
     }
 }

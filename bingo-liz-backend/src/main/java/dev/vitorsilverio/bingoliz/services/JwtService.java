@@ -40,7 +40,7 @@ public class JwtService {
     private boolean isTokenExpired(String token) {
         final var now = new Date(System.currentTimeMillis());
         final var expiration = extractClaim(token, Claims::getExpiration);
-        return expiration.after(now);
+        return expiration.before(now);
     }
 
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
@@ -49,7 +49,7 @@ public class JwtService {
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + (1000 * 60 * 2)))
+                .setExpiration(new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 5)))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

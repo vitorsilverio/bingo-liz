@@ -2,12 +2,14 @@ package dev.vitorsilverio.bingoliz.config;
 
 
 import dev.vitorsilverio.bingoliz.services.JwtService;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,9 +36,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         final String jwt = authorizationHeader.substring(7);
         final String usuario = jwtService.extrairUsuario(jwt);
-        if(usuario != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        if (usuario != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             var userDetails = userDetailsService.loadUserByUsername(usuario);
-            if(jwtService.isTokenValid(jwt, userDetails)) {
+            if (jwtService.isTokenValid(jwt, userDetails)) {
                 var authToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities()
                 );

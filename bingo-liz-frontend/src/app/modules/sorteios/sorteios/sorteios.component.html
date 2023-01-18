@@ -1,1 +1,18 @@
-<p>sorteios works!</p>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Sorteios</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-form-field appearance="outline" [ngStyle]="{width: '300px'}">
+          <mat-label>Título</mat-label>
+          <input matInput type="text"  placeholder="Título" [formControl]="titulo"/>
+          <mat-error>Campo Obrigatório</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="novo()"><mat-icon>add</mat-icon>Novo Sorteio</button>
+        <mat-list dense>
+            <mat-list-item *ngFor="let item of sorteios | async">
+                {{item.titulo}}
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-card>
