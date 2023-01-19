@@ -1,3 +1,16 @@
-<mat-list>
-  <mat-list-item *ngFor="let numero of (cartela|async)?.numerosCartela">{{numero.numero}}</mat-list-item>
-</mat-list>
+<mat-card class="corpo">
+  <mat-card-header>
+    <mat-card-title>
+      Cartela da Sorte
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="conteudo">
+    <div class="cartela">
+      <div *ngFor="let numero of reordenar((cartela|async)?.numerosCartela)" (click)="marcar(numero)" [ngClass]="{'marcado':numero.marcado}">{{numero.numero}}</div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-stroked-button color="accent" (click)="bingo()">BINGO!</button>
+  </mat-card-actions>
+</mat-card>
+

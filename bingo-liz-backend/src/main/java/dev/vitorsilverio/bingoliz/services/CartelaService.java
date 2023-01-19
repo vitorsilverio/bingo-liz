@@ -49,7 +49,7 @@ public class CartelaService {
                 .toList());
         Collections.shuffle(numerosPossiveis);
         final var ordem = new AtomicInteger(1);
-        cartela.getNumerosCartela().addAll(numerosPossiveis.stream().limit(24).sorted().map(
+        cartela.getNumerosCartela().addAll(numerosPossiveis.stream().limit(25).sorted().map(
                 i -> NumeroCartela.builder()
                         .cartela(cartela)
                         .marcado(false)
