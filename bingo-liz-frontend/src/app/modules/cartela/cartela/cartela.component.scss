@@ -1,6 +1,5 @@
 .corpo {
   margin: auto;
-  max-width: 400px;
 }
 
 .conteudo{
@@ -14,19 +13,41 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   grid-auto-flow: column;
-  max-width: 350px;
 }
 
 .cartela div {
-  width: 50px;
-  height: 50px;
+  width: 13vmin;
+  height: 13vmin;
   text-align: center;
   vertical-align: middle;
-  line-height: 50px;
+  line-height: 13vmin;
   font-weight: bold;
+  font-size: xx-large;
+  margin: 1vmin;
+  border-radius: 6vmin;
+  border: 1px solid #ff4081;
 }
 
 .marcado {
-  border-radius: 1em;
-  border: 1px solid #ff4081;
+  border-radius: 6vmin;
+  background-color: #ff4081;
+  color: white;
+}
+
+.centralizar {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 700px) {
+  .cartela div {
+    margin: 0.5vmin;
+    width: 8vmin;
+    height: 8vmin;
+    line-height: 8vmin;
+    font-size: xx-large;
+    border: 4px solid #ff4081;
+  }
 }

@@ -1,6 +1,6 @@
 <mat-card class="corpo">
   <mat-card-header>
-    <mat-card-title>
+    <mat-card-title class="centralizar">
       Cartela da Sorte
     </mat-card-title>
   </mat-card-header>
@@ -9,8 +9,8 @@
       <div *ngFor="let numero of reordenar((cartela|async)?.numerosCartela)" (click)="marcar(numero)" [ngClass]="{'marcado':numero.marcado}">{{numero.numero}}</div>
     </div>
   </mat-card-content>
-  <mat-card-actions align="end">
-    <button mat-stroked-button color="accent" (click)="bingo()">BINGO!</button>
+  <mat-card-actions class="centralizar">
+    <button mat-raised-button color="accent" (click)="bingo()">BINGO!</button>
   </mat-card-actions>
 </mat-card>
 
