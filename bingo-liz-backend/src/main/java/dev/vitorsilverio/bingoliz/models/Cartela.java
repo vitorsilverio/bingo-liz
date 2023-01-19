@@ -22,7 +22,7 @@ public class Cartela extends EntidadeBase{
     @JoinColumn(name = "sorteio_id")
     private Sorteio sorteio;
 
-    @OneToMany(mappedBy = "cartela")
+    @OneToMany(mappedBy = "cartela", cascade = CascadeType.ALL)
     private List<NumeroCartela> numerosCartela = new java.util.ArrayList<>();
 
     @ManyToOne

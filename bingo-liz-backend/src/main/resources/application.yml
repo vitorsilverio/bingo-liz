@@ -9,3 +9,8 @@ spring:
 
 jwt:
   secret: ${JWT_SECRET:6B5970337336763979244226452948404D6251655468576D5A7134743777217A}
+
+logging:
+  level:
+    org:
+      springframework: DEBUG

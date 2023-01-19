@@ -67,4 +67,9 @@ public class Usuario extends EntidadeBase implements UserDetails {
     public boolean isEnabled() {
         return ativo;
     }
+
+    @Override
+    public String toString() {
+        return this.nomeUsuario;
+    }
 }

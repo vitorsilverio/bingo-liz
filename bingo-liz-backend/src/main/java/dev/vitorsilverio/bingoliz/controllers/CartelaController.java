@@ -2,6 +2,8 @@ package dev.vitorsilverio.bingoliz.controllers;
 
 import dev.vitorsilverio.bingoliz.dtos.CartelaDto;
 import dev.vitorsilverio.bingoliz.services.CartelaService;
+import jakarta.annotation.security.PermitAll;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +20,8 @@ public class CartelaController {
     private final CartelaService cartelaService;
 
     @GetMapping
-    public ResponseEntity<CartelaDto> cartela(UUID sorteio) {
-        return ResponseEntity.ok(cartelaService.minhaCartela(sorteio));
+    @PermitAll
+    public ResponseEntity<CartelaDto> cartela(@NotNull String sorteio) {
+        return ResponseEntity.ok(cartelaService.minhaCartela(UUID.fromString(sorteio)));
     }
 }

@@ -40,13 +40,14 @@ public class AutenticacaoService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(credenciais.getUsuario(), credenciais.getSenha())
         );
-        var usuario = usuarioRepository.findByNomeUsuario(credenciais.getUsuario()).orElseThrow();
+        var usuario = usuarioRepository.findByNomeUsuarioIgnoreCase(credenciais.getUsuario()).orElseThrow();
         return Autenticacao.builder()
                 .token(jwtService.generateToken(usuario))
                 .build();
     }
 
     public Optional<Usuario> getUsuarioAtivo() {
-        return usuarioRepository.findByNomeUsuario(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
+        final var usuario = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        return usuarioRepository.findByNomeUsuarioIgnoreCase(usuario);
     }
 }

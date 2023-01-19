@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.UUID;
@@ -31,6 +32,9 @@ public class CartelaService {
         var cartela = cartelaRepository.findFirstBySorteioAndUsuario(sorteio, usuario).orElse(new Cartela());
         if (cartela.getNumerosCartela().isEmpty()) {
             gerarNumerosCartela(cartela);
+            cartela.setSorteio(sorteio);
+            cartela.setUsuario(usuario);
+            cartela.setDataCriacao(LocalDateTime.now());
             cartela = cartelaRepository.save(cartela);
         }
         return new CartelaDto(cartela.getId(), cartela.getNumerosCartela().stream().map(

@@ -13,10 +13,10 @@ export class CartelaService {
     private http: HttpClient
   ) { }
 
-  listarSorteios(sorteio: string): Observable<CartelaModel>{
+  carregarCartela(sorteio: string): Observable<CartelaModel>{
     let params = new HttpParams({
       fromObject: {sorteio: sorteio}
     })
-    return this.http.get<CartelaModel>(`${environment.apiUrl}/cartela`, )
+    return this.http.get<CartelaModel>(`${environment.apiUrl}/cartela`, {params: params})
   }
 }
