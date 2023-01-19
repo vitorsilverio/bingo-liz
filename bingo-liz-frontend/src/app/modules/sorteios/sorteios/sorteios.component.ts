@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Component} from '@angular/core';
 import {SorteioService} from 'src/app/services/sorteio.service';
 import {Router} from "@angular/router";
+import {AutenticaoService} from "../../../services/autenticacao.service";
 
 @Component({
   selector: 'app-sorteios',
@@ -17,7 +18,8 @@ export class SorteiosComponent{
 
   constructor(
     private sorteioService: SorteioService,
-    private router: Router
+    private router: Router,
+    private autenticacaoService: AutenticaoService
   ) {
     this.sorteios = this.sorteioService.listarSorteios()
     this.titulo = new FormControl<string>('', {nonNullable: true, validators: [Validators.required]})
@@ -33,6 +35,10 @@ export class SorteiosComponent{
 
   participar(sorteio: string) {
     this.router.navigate(['sorteio',sorteio])
+  }
+
+  podeCriar() : boolean {
+    return this.autenticacaoService.role === 'PAPAI'
   }
 
 }

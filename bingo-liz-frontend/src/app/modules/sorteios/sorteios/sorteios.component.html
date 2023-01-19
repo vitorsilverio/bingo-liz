@@ -3,16 +3,22 @@
         <mat-card-title>Sorteios</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <mat-form-field appearance="outline" [ngStyle]="{width: '300px'}">
-          <mat-label>Título</mat-label>
-          <input matInput type="text"  placeholder="Título" [formControl]="titulo"/>
-          <mat-error>Campo Obrigatório</mat-error>
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="novo()"><mat-icon>add</mat-icon>Novo Sorteio</button>
-        <mat-list dense>
+
+
+        <mat-list>
             <mat-list-item *ngFor="let item of sorteios | async">
-                {{item.titulo}} <button mat-raised-button (click)="participar(item.id!)">Participar</button>
+              <h2>{{item.titulo}} <button mat-raised-button (click)="participar(item.id!)" color="accent">Participar</button></h2>
             </mat-list-item>
         </mat-list>
     </mat-card-content>
+  <mat-card-actions *ngIf="podeCriar()">
+    <div class=".cadastro">
+      <mat-form-field appearance="outline" [ngStyle]="{width: '300px'}">
+        <mat-label>Título</mat-label>
+        <input matInput type="text"  placeholder="Título" [formControl]="titulo" />
+        <mat-error>Campo Obrigatório</mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="novo()"><mat-icon>add</mat-icon>Novo Sorteio</button>
+    </div>
+  </mat-card-actions>
 </mat-card>

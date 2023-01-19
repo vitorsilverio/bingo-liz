@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -32,7 +33,7 @@ public class AutenticacaoService {
         usuario.setUsuarioTipo(UsuarioTipo.CONVIDADO);
         usuario = usuarioRepository.save(usuario);
         return Autenticacao.builder()
-                .token(jwtService.generateToken(usuario))
+                .token(jwtService.generateToken(Map.of("role", usuario.getUsuarioTipo().name()), usuario))
                 .build();
     }
 
@@ -42,7 +43,7 @@ public class AutenticacaoService {
         );
         var usuario = usuarioRepository.findByNomeUsuarioIgnoreCase(credenciais.getUsuario()).orElseThrow();
         return Autenticacao.builder()
-                .token(jwtService.generateToken(usuario))
+                .token(jwtService.generateToken(Map.of("role", usuario.getUsuarioTipo().name()), usuario))
                 .build();
     }
 

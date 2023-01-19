@@ -33,7 +33,6 @@ export class EntrarComponent {
     this.autenticacaoService.login(this.form.value as UsuarioModel).subscribe({
       next: _ => {
         let redirecionamento = this.route.snapshot.queryParamMap.get('returnUrl')
-        console.log(redirecionamento)
         if(redirecionamento){
           this.router.navigate([redirecionamento])
         }else{
