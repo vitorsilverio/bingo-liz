@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
+import {Component} from '@angular/core';
 import {SorteioService} from "src/app/services/sorteio.service";
 import {ActivatedRoute} from "@angular/router";
 import {Observable, Observer} from "rxjs";
@@ -9,7 +9,6 @@ import {CartelaService} from "src/app/services/cartela.service";
   selector: 'app-sorteio',
   templateUrl: './sorteio.component.html',
   styleUrls: ['./sorteio.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SorteioComponent {
 
@@ -23,7 +22,6 @@ export class SorteioComponent {
     private sorteioService: SorteioService,
     private route: ActivatedRoute,
     private cartelaService: CartelaService,
-    private cd: ChangeDetectorRef
   ) {
     this.id = this.route.snapshot.paramMap.get('id')
 
@@ -48,7 +46,6 @@ export class SorteioComponent {
       this.cartelaService.listarCartelasPremiadas(this.id).subscribe({
         next: c => {
           observer.next([...c])
-          this.cd.markForCheck()
         }
       })
     }
