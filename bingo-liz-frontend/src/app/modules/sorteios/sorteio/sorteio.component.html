@@ -1,0 +1,25 @@
+<mat-card class="centralizado">
+  <mat-card-header>
+    <mat-card-title class="maior">
+      Último número sorteado
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <span class="numero">{{ultimoNumero}}</span>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="sortear()" color="accent" class="maior" [disabled]="sorteioFinalizado">Sortear próximo</button>
+  </mat-card-actions>
+</mat-card>
+<mat-card class="centralizado">
+  <mat-card-header>
+    <mat-card-title>Cartelas que chamaram bingo:</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let cartela of cartelasPremiadas|async">
+        <p [style]="{fontSize: 'large', textTransform: 'uppercase', fontWeight: 'bold'}">{{cartela.nome}} <button mat-icon-button color="warn" (click)="verificar(cartela.id)"><mat-icon>verified</mat-icon></button></p>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

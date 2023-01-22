@@ -58,4 +58,11 @@ public class CartelaService {
                         .build()
         ).toList());
     }
+
+    public void chamarBingo(UUID id) {
+        var usuario = autenticacaoService.getUsuarioAtivo().orElseThrow();
+        var cartela = cartelaRepository.findFirstByIdAndUsuario(id, usuario).orElseThrow();
+        cartela.setBingo(true);
+        cartelaRepository.save(cartela);
+    }
 }

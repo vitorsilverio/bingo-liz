@@ -13,6 +13,7 @@ import {AppComponent} from './app.component';
 import {SorteiosModule} from './modules/sorteios/sorteios.module';
 import {UsuarioModule} from './modules/usuario/usuario.module';
 import {CartelaModule} from "./modules/cartela/cartela.module";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [

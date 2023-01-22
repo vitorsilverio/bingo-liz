@@ -1,6 +1,6 @@
 <mat-toolbar color="accent">
   <mat-icon>baby_changing_station</mat-icon>&nbsp;
-  <span>Bingo do Chá de Fraldas da Liz</span>
+  <a mat-button [routerLink]="['/']" >Bingo do Chá de Fraldas da Liz</a>
   <span style="flex: 1 1 auto;"></span>
   <button  mat-icon-button *ngIf="autenticado()" (click)="sair()"><mat-icon>logout</mat-icon></button>
 </mat-toolbar>

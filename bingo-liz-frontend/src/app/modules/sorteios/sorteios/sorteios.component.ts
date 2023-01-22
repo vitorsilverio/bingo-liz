@@ -41,4 +41,7 @@ export class SorteiosComponent{
     return this.autenticacaoService.role === 'PAPAI'
   }
 
+  sortear(sorteio: string) {
+      this.router.navigate(['sorteio',sorteio,'sortear'])
+  }
 }

@@ -9,12 +9,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 
 import { SorteiosComponent } from './sorteios/sorteios.component';
+import { SorteioComponent } from './sorteio/sorteio.component';
 
 
 
 @NgModule({
   declarations: [
-    SorteiosComponent
+    SorteiosComponent,
+    SorteioComponent
   ],
   imports: [
     CommonModule,

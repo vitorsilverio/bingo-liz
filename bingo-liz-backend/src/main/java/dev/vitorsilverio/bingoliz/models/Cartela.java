@@ -32,4 +32,6 @@ public class Cartela extends EntidadeBase{
     @Column(name = "data_criacao")
     private LocalDateTime dataCriacao;
 
+    private Boolean bingo;
+
 }

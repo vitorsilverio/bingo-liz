@@ -7,7 +7,7 @@
 
         <mat-list>
             <mat-list-item *ngFor="let item of sorteios | async">
-              <h2>{{item.titulo}} <button mat-raised-button (click)="participar(item.id!)" color="accent">Participar</button></h2>
+              <h2>{{item.titulo}} <button mat-raised-button (click)="participar(item.id!)" color="accent">Participar</button><button mat-raised-button *ngIf="podeCriar()" (click)="sortear(item.id!)" color="primary">Sortear</button></h2>
             </mat-list-item>
         </mat-list>
     </mat-card-content>

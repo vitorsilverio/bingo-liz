@@ -59,6 +59,7 @@ export class AutenticaoService {
   logout() {
     localStorage.removeItem('token')
     localStorage.removeItem('usuario')
+    this.tokenSubject.unsubscribe()
   }
 
   setUsuario(usuario: string) {

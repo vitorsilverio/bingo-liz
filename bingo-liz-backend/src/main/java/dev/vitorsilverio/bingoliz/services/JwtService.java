@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Map;
 import java.util.function.Function;
@@ -42,12 +44,14 @@ public class JwtService {
     }
 
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+        var agora = LocalDateTime.now();
+        var zone = ZoneId.systemDefault();
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 5)))
+                .setIssuedAt(Date.from(agora.atZone(zone).toInstant()))
+                .setExpiration(Date.from( agora.plusHours(2).atZone(zone).toInstant() ))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

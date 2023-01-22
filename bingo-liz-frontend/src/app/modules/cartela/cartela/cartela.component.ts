@@ -56,6 +56,9 @@ export class CartelaComponent
   }
 
   bingo() {
+    this.cartela?.subscribe({
+      next: c => this.cartelaService.gritarBingo(c.id!).subscribe()
+    })
 
   }
 }
