@@ -5,7 +5,7 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <span class="numero">{{ultimoNumero}}</span>
+    <span class="numero">{{ultimoNumero ? ultimoNumero : '-'}}</span>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button (click)="sortear()" color="accent" class="maior" [disabled]="sorteioFinalizado">Sortear próximo</button>
