@@ -5,6 +5,7 @@ import {AutenticacaoModel} from 'src/app/models/autenticacao.model';
 import {UsuarioModel} from 'src/app/models/usuario.model';
 import {environment} from 'src/environments/environment';
 import jwtDecode from "jwt-decode";
+import {Router} from "@angular/router";
 
 interface CustomClaims {
   iss?: string
@@ -23,7 +24,10 @@ export class AutenticaoService {
   private tokenSubject: BehaviorSubject<AutenticacaoModel>
   public token: Observable<AutenticacaoModel>
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) {
     this.tokenSubject = new BehaviorSubject<AutenticacaoModel>(JSON.parse(localStorage.getItem('token')!))
     this.token = this.tokenSubject.asObservable()
   }
@@ -59,7 +63,8 @@ export class AutenticaoService {
   logout() {
     localStorage.removeItem('token')
     localStorage.removeItem('usuario')
-    this.tokenSubject.unsubscribe()
+    this.tokenSubject.complete()
+    this.router.navigate(["/"])
   }
 
   setUsuario(usuario: string) {
