@@ -2,3 +2,23 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mensagem-erro {
+  div {
+    color: white;
+    background-color: red !important;
+    button{
+      color: white !important;
+    }
+  }
+}
+
+.mensagem-sucesso {
+  div {
+    color: white;
+    background-color: darkslateblue !important;
+    button{
+      color: white !important;
+    }
+  }
+}

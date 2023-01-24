@@ -5,6 +5,7 @@ import {Component} from '@angular/core';
 import {SorteioService} from 'src/app/services/sorteio.service';
 import {Router} from "@angular/router";
 import {AutenticaoService} from "../../../services/autenticacao.service";
+import {MensagemService} from "../../../services/mensagem.service";
 
 @Component({
   selector: 'app-sorteios',
@@ -19,7 +20,8 @@ export class SorteiosComponent{
   constructor(
     private sorteioService: SorteioService,
     private router: Router,
-    private autenticacaoService: AutenticaoService
+    private autenticacaoService: AutenticaoService,
+    private mensagemService: MensagemService,
   ) {
     this.sorteios = this.sorteioService.listarSorteios()
     this.titulo = new FormControl<string>('', {nonNullable: true, validators: [Validators.required]})
@@ -29,7 +31,8 @@ export class SorteiosComponent{
     this.sorteioService.criarSorteio({titulo: this.titulo.value} as SorteioModel).subscribe({
       next: _ => {
         this.sorteios = this.sorteioService.listarSorteios()
-      }
+      },
+      error: e => this.mensagemService.erro(e)
     })
   }
 

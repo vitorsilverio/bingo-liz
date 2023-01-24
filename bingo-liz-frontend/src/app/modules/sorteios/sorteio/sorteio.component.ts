@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Observable, Observer} from "rxjs";
 import {CartelaPremiadaModel} from "src/app/models/cartela-premiada.model";
 import {CartelaService} from "src/app/services/cartela.service";
+import {MensagemService} from "../../../services/mensagem.service";
 
 @Component({
   selector: 'app-sorteio',
@@ -22,6 +23,7 @@ export class SorteioComponent {
     private sorteioService: SorteioService,
     private route: ActivatedRoute,
     private cartelaService: CartelaService,
+    private mensagemService: MensagemService
   ) {
     this.id = this.route.snapshot.paramMap.get('id')
 
@@ -32,7 +34,8 @@ export class SorteioComponent {
           if (this.numerosSorteados.length == 75) {
             this.sorteioFinalizado = true
           }
-        }
+        },
+        error: e => this.mensagemService.erro(e)
       })
     }
     this.cartelasPremiadas = new Observable<CartelaPremiadaModel[]>(
@@ -46,7 +49,11 @@ export class SorteioComponent {
       this.cartelaService.listarCartelasPremiadas(this.id).subscribe({
         next: c => {
           observer.next([...c])
-        }
+          if (c.length>0){
+            this.mensagemService.sucesso("BINGO!")
+          }
+        },
+        error: e => this.mensagemService.erro(e)
       })
     }
   }
@@ -66,7 +73,8 @@ export class SorteioComponent {
       next: _ => {
         this.numerosSorteados.push(numero)
         this.ultimoNumero = numero;
-      }
+      },
+      error: e => this.mensagemService.erro(e)
     })
 
   }

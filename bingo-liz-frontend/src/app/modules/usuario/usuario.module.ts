@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { EntrarComponent } from './entrar/entrar.component';
 import { RegistroComponent } from './registro/registro.component';
 import { UsuarioRoutingModule } from './usuario-routing.module';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 
@@ -25,6 +26,7 @@ import { UsuarioRoutingModule } from './usuario-routing.module';
     MatCardModule,
     MatInputModule,
     MatButtonModule,
+    MatSnackBarModule
   ],
   exports: [
     UsuarioRoutingModule,

@@ -5,6 +5,7 @@ import {CartelaModel} from "src/app/models/cartela.model";
 import {Observable} from "rxjs";
 import {NumeroCartelaModel} from "src/app/models/numero-cartela.model";
 import {SorteioService} from "src/app/services/sorteio.service";
+import {MensagemService} from "../../../services/mensagem.service";
 
 @Component({
   selector: 'app-cartela',
@@ -21,7 +22,8 @@ export class CartelaComponent
     private route: ActivatedRoute,
     private router: Router,
     private cartelaService: CartelaService,
-    private sorteioService: SorteioService
+    private sorteioService: SorteioService,
+    private mensagemService: MensagemService
 
   ) {
     this.id = this.route.snapshot.paramMap.get('id')
@@ -50,14 +52,16 @@ export class CartelaComponent
     if (numero) {
       numero.marcado = !numero.marcado
       this.cartelaService.marcar(numero).subscribe({
-        next: _ => this.carregarCartela()
+        next: _ => this.carregarCartela(),
+        error: e => this.mensagemService.erro(e)
       })
     }
   }
 
   bingo() {
     this.cartela?.subscribe({
-      next: c => this.cartelaService.gritarBingo(c.id!).subscribe()
+      next: c => this.cartelaService.gritarBingo(c.id!).subscribe(),
+      error: e => this.mensagemService.erro(e)
     })
 
   }

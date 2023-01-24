@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UsuarioModel } from 'src/app/models/usuario.model';
 import { AutenticaoService } from 'src/app/services/autenticacao.service';
 import { matchValidator } from 'src/app/util/form-validators';
+import {MensagemService} from "../../../services/mensagem.service";
 
 interface EntrarForm {
   usuario: FormControl<string>
@@ -22,7 +23,8 @@ export class RegistroComponent {
 
   constructor(
     private autenticaoService: AutenticaoService,
-    private router: Router
+    private router: Router,
+    private mensagemService: MensagemService,
     ) {
     this.form = new FormGroup<EntrarForm>({
       usuario: new FormControl<string>('', {nonNullable: true, validators: [Validators.required]}),
@@ -35,7 +37,8 @@ export class RegistroComponent {
     this.autenticaoService.registrar(this.form.value as UsuarioModel).subscribe({
       next: _ => {
           this.router.navigate(['/'])
-      }
+      },
+      error: e => this.mensagemService.erro(e)
     })
 
   }

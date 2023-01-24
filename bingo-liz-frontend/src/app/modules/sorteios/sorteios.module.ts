@@ -10,6 +10,7 @@ import { MatListModule } from '@angular/material/list';
 
 import { SorteiosComponent } from './sorteios/sorteios.component';
 import { SorteioComponent } from './sorteio/sorteio.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 
@@ -27,6 +28,7 @@ import { SorteioComponent } from './sorteio/sorteio.component';
     ReactiveFormsModule,
     MatCardModule,
     MatInputModule,
+    MatSnackBarModule,
   ]
 })
 export class SorteiosModule { }

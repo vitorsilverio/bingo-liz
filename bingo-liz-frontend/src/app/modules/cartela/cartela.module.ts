@@ -4,6 +4,7 @@ import { CartelaComponent } from './cartela/cartela.component';
 import {MatListModule} from "@angular/material/list";
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 
@@ -15,7 +16,8 @@ import {MatButtonModule} from "@angular/material/button";
     CommonModule,
     MatListModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule
   ]
 })
 export class CartelaModule { }
