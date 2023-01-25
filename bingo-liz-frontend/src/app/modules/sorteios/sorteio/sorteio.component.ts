@@ -78,7 +78,16 @@ export class SorteioComponent {
     })
 
   }
-  verificar(id: string) {
-
+  verificar(id: string, usuario: string) {
+    this.sorteioService.conferirCartela(id).subscribe({
+      next: b => {
+        if (b) {
+          this.mensagemService.sucesso(`${usuario} Ganhou!`.toUpperCase())
+        }else{
+          this.mensagemService.sucesso(`${usuario} furou panela!`.toUpperCase())
+        }
+      },
+      error: e => this.mensagemService.erro(e)
+    })
   }
 }

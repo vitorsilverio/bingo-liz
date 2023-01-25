@@ -18,7 +18,7 @@
   <mat-card-content>
     <mat-list>
       <mat-list-item *ngFor="let cartela of cartelasPremiadas|async">
-        <p [style]="{fontSize: 'large', textTransform: 'uppercase', fontWeight: 'bold'}">{{cartela.nome}} <button mat-icon-button color="warn" (click)="verificar(cartela.id)"><mat-icon>verified</mat-icon></button></p>
+        <p [style]="{fontSize: 'large', textTransform: 'uppercase', fontWeight: 'bold'}">{{cartela.nome}} <button mat-icon-button color="warn" (click)="verificar(cartela.id, cartela.nome)"><mat-icon>verified</mat-icon></button></p>
       </mat-list-item>
     </mat-list>
   </mat-card-content>

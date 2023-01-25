@@ -51,4 +51,9 @@ public class SorteioController {
         return ResponseEntity.ok(sorteioService.getCartelasQueChamaramBingo(id));
     }
 
+    @GetMapping("/cartela/{id}")
+    @PreAuthorize("hasRole('PAPAI')")
+    public ResponseEntity<Boolean> conferir(@PathVariable UUID id) {
+        return ResponseEntity.ok(sorteioService.conferirCartela(id));
+    }
 }

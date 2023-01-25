@@ -29,4 +29,8 @@ export class SorteioService {
   adicionarNumeroSorteado(id: string, numero: number): Observable<any>{
     return this.http.post<any>(`${environment.apiUrl}/sorteio/${id}`, numero)
   }
+
+  conferirCartela(id: string): Observable<boolean>{
+    return this.http.get<boolean>(`${environment.apiUrl}/sorteio/cartela/${id}`)
+  }
 }

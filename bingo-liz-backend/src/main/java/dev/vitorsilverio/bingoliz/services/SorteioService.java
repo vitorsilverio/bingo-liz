@@ -60,4 +60,20 @@ public class SorteioService {
         var cartelas = cartelaRepository.findAllByBingoAndSorteio(true, sorteio);
         return cartelas.stream().map(c -> new CartelaPremiadaDto(c.getId(), c.getUsuario().getNomeUsuario())).toList();
     }
+
+    @Transactional
+    public Boolean conferirCartela(UUID id) {
+        var cartela = cartelaRepository.findById(id).orElseThrow();
+        var sorteio = cartela.getSorteio();
+        var numerosSorteados = sorteio.getNumerosSorteados().stream().map(n -> n.getNumero()).toList();
+        var ganhou = cartela.getNumerosCartela().stream().allMatch(n -> numerosSorteados.contains(n.getNumero()));
+        if(!ganhou){
+            cartela.setBingo(false);
+            cartelaRepository.save(cartela);
+        }else{
+            sorteio.setAtivo(false);
+            sorteioRepository.save(sorteio);
+        }
+        return ganhou;
+    }
 }
