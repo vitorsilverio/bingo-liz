@@ -1,8 +1,8 @@
-FROM arm64v8/openjdk:17-jdk-slim-bullseye as build
+FROM arm64v8/gradle:jdk17 as build
 WORKDIR /workspace/app
 
 COPY . /workspace/app
-RUN ./gradlew clean build -x test
+RUN gradle clean build -x test
 
 FROM arm64v8/openjdk:17-jdk-slim-bullseye
 COPY --from=build workspace/app/build/libs/*.jar ./
