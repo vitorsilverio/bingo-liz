@@ -1,4 +1,4 @@
-FROM arm64v8/gradle:jdk17 as build
+FROM gradle:jdk17-alpine as build
 WORKDIR /workspace/app
 
 COPY . /workspace/app
