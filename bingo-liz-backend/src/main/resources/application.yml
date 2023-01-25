@@ -18,3 +18,7 @@ logging:
 app:
   frontend:
     uri: ${FRONTEND_URI:http://localhost:4200/}
+
+server:
+  servlet:
+    context-path: ${BACKEND_CONTEXT:}
