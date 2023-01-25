@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jdk-alpine as build
+FROM arm64v8/openjdk:17 as build
 WORKDIR /workspace/app
 
 COPY . /workspace/app
