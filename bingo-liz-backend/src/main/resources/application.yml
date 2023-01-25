@@ -14,3 +14,7 @@ logging:
   level:
     org:
       springframework: DEBUG
+
+app:
+  frontend:
+    uri: ${FRONTEND_URI:http://localhost:4200/}
