@@ -5,9 +5,11 @@
     <mat-card-content>
 
 
-        <mat-list>
-            <mat-list-item *ngFor="let item of sorteios | async">
-              <h2>{{item.titulo}} <button mat-raised-button (click)="participar(item.id!)" color="accent">Participar</button><button mat-raised-button *ngIf="podeCriar()" (click)="sortear(item.id!)" color="primary">Sortear</button></h2>
+        <mat-list class="quebraLinhas">
+            <mat-list-item *ngFor="let item of sorteios | async" class="quebraLinhas">
+              <span class="sorteio">{{item.titulo}}</span> &nbsp;
+              <button mat-raised-button (click)="participar(item.id!)" color="accent">Participar</button>&nbsp;
+              <button mat-raised-button *ngIf="podeCriar()" (click)="sortear(item.id!)" color="primary">Sortear</button>
             </mat-list-item>
         </mat-list>
     </mat-card-content>

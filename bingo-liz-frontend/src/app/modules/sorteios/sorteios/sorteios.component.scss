@@ -5,3 +5,19 @@
   min-height: 20px !important;
   max-width: 50px !important;
 }
+
+.sorteio {
+  font-weight: bold;
+  font-size: large;
+}
+
+.quebraLinhas {
+  * {
+    word-wrap: break-word !important;
+    white-space: pre-wrap !important;
+    overflow: visible;
+  }
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  margin-bottom: 1rem;
+}
