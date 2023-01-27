@@ -1,11 +1,12 @@
-<mat-toolbar color="accent">
-  <mat-icon>baby_changing_station</mat-icon>&nbsp;
-  <a mat-button [routerLink]="['/']" >Bingo do Chá de Fraldas da Liz</a>
-  <span style="flex: 1 1 auto;"></span>
-  <button  mat-icon-button *ngIf="autenticado()" (click)="sair()"><mat-icon>logout</mat-icon></button>
-</mat-toolbar>
-
-<router-outlet></router-outlet>
+<div id="content">
+  <mat-toolbar color="accent">
+    <mat-icon>baby_changing_station</mat-icon>&nbsp;
+    <a mat-button [routerLink]="['/']" >Bingo do Chá de Fraldas da Liz</a>
+    <span style="flex: 1 1 auto;"></span>
+    <button  mat-icon-button *ngIf="autenticado()" (click)="sair()"><mat-icon>logout</mat-icon></button>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+</div>
 <footer>
   <p>Esse é o link do nosso site de chá de bebê e lista de presentes: <a mat-button href="https://www.listasmagalu.com/chadebebe/liz-vitor-maria">Lista de presentes <mat-icon>redeem</mat-icon></a></p>
   <p>Vítor Silvério Rodrigues &#169; 2023</p>

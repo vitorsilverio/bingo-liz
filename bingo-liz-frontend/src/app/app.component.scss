@@ -1,11 +1,13 @@
-app-root {
-  height: 100vh;
+#content {
+  padding-bottom: 6rem;
 }
 
 footer {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   text-align: center;
+  height: 6rem;
   width: 100vw;
 }
+
 
