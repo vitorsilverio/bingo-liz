@@ -60,7 +60,15 @@ export class CartelaComponent
 
   bingo() {
     this.cartela?.subscribe({
-      next: c => this.cartelaService.gritarBingo(c.id!).subscribe(),
+      next: c => {
+        this.cartelaService.gritarBingo(c.id!).subscribe({
+          next: _ => {
+            this.carregarCartela()
+            this.mensagemService.sucesso("Gritou bingo")
+          },
+          error: e => this.mensagemService.erro(e)
+        })
+      },
       error: e => this.mensagemService.erro(e)
     })
 

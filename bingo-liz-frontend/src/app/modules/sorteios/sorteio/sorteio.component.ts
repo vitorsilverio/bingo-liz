@@ -1,17 +1,17 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {SorteioService} from "src/app/services/sorteio.service";
 import {ActivatedRoute} from "@angular/router";
 import {Observable, Observer} from "rxjs";
 import {CartelaPremiadaModel} from "src/app/models/cartela-premiada.model";
 import {CartelaService} from "src/app/services/cartela.service";
-import {MensagemService} from "../../../services/mensagem.service";
+import {MensagemService} from "src/app/services/mensagem.service";
 
 @Component({
   selector: 'app-sorteio',
   templateUrl: './sorteio.component.html',
   styleUrls: ['./sorteio.component.scss'],
 })
-export class SorteioComponent {
+export class SorteioComponent implements OnDestroy{
 
   id: string|null;
   ultimoNumero: number = 0;
@@ -48,7 +48,7 @@ export class SorteioComponent {
     if(this.id) {
       this.cartelaService.listarCartelasPremiadas(this.id).subscribe({
         next: c => {
-          observer.next([...c])
+          observer.next(c)
           if (c.length>0){
             this.mensagemService.sucesso("BINGO!")
           }
@@ -89,5 +89,9 @@ export class SorteioComponent {
       },
       error: e => this.mensagemService.erro(e)
     })
+  }
+
+  ngOnDestroy(): void {
+    let subscription: any = this.cartelasPremiadas.subscribe(_ => subscription.unsubscribe())
   }
 }
