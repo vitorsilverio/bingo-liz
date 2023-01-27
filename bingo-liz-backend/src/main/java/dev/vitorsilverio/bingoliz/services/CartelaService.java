@@ -37,7 +37,7 @@ public class CartelaService {
             cartela.setDataCriacao(LocalDateTime.now());
             cartela = cartelaRepository.save(cartela);
         }
-        return new CartelaDto(cartela.getId(), cartela.getNumerosCartela().stream().map(
+        return new CartelaDto(cartela.getId(), cartela.getBingo(), cartela.getNumerosCartela().stream().map(
                 n -> new NumeroCartelaDto(n.getId(), n.getNumero(), n.isMarcado(), n.getOrdem())
         ).toList());
     }

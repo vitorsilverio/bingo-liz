@@ -10,7 +10,7 @@
     </div>
   </mat-card-content>
   <mat-card-actions class="centralizar">
-    <button mat-raised-button color="accent" (click)="bingo()" [style]="{fontSize:'x-large'}" >BINGO!</button>
+    <button mat-raised-button color="accent" (click)="bingo()" [style]="{fontSize:'x-large'}" [disabled]="(cartela|async)?.bingo">BINGO!</button>
   </mat-card-actions>
 </mat-card>
 

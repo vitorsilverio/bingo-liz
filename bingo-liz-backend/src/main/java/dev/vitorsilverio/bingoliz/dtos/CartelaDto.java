@@ -14,5 +14,6 @@ import java.util.UUID;
 @Data
 public class CartelaDto implements Serializable {
     private final UUID id;
+    private final boolean bingo;
     private final List<NumeroCartelaDto> numerosCartela;
 }
