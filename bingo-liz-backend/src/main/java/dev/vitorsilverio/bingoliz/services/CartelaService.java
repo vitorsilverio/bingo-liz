@@ -35,9 +35,9 @@ public class CartelaService {
             cartela.setSorteio(sorteio);
             cartela.setUsuario(usuario);
             cartela.setDataCriacao(LocalDateTime.now());
+            cartela.setBingo(false);
             cartela = cartelaRepository.save(cartela);
         }
-        cartela.setBingo(false);
         return new CartelaDto(cartela.getId(), cartela.getBingo(), cartela.getNumerosCartela().stream().map(
                 n -> new NumeroCartelaDto(n.getId(), n.getNumero(), n.isMarcado(), n.getOrdem())
         ).toList());
