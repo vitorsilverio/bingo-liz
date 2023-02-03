@@ -5,6 +5,8 @@ import {Observable, Observer} from "rxjs";
 import {CartelaPremiadaModel} from "src/app/models/cartela-premiada.model";
 import {CartelaService} from "src/app/services/cartela.service";
 import {MensagemService} from "src/app/services/mensagem.service";
+import {MatDialog} from "@angular/material/dialog";
+import {NumerosSorteadosDialogComponent} from "../numeros-sorteados-dialog/numeros-sorteados-dialog.component";
 
 @Component({
   selector: 'app-sorteio',
@@ -23,7 +25,8 @@ export class SorteioComponent implements OnDestroy{
     private sorteioService: SorteioService,
     private route: ActivatedRoute,
     private cartelaService: CartelaService,
-    private mensagemService: MensagemService
+    private mensagemService: MensagemService,
+    private dialog: MatDialog
   ) {
     this.id = this.route.snapshot.paramMap.get('id')
 
@@ -93,5 +96,12 @@ export class SorteioComponent implements OnDestroy{
 
   ngOnDestroy(): void {
     let subscription: any = this.cartelasPremiadas.subscribe(_ => subscription.unsubscribe())
+  }
+
+  mostrarSorteados(){
+    const ref = this.dialog.open(NumerosSorteadosDialogComponent,{
+      disableClose: true
+    })
+    ref.componentInstance.numerosSorteados = this.numerosSorteados
   }
 }

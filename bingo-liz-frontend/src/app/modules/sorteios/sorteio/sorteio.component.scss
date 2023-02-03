@@ -12,3 +12,19 @@
   font-size: 400px;
   line-height: 400px;
 }
+
+#botao-numeros-sorteados {
+  z-index: 999;
+  position: absolute;
+  bottom: 4rem;
+  right: 4rem;
+  width: 84px;
+  height: 84px;
+}
+
+#icone-numeros-sorteados {
+  font-size: xxx-large;
+  width: fit-content;
+  height: fit-content;
+
+}

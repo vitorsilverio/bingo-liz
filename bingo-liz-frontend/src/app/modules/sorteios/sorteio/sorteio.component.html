@@ -22,4 +22,6 @@
       </mat-list-item>
     </mat-list>
   </mat-card-content>
+  <mat-progress-bar [color]="numerosSorteados.length>25?'primary':'accent'" [value]="numerosSorteados.length/75 * 100" mode="determinate"></mat-progress-bar>
 </mat-card>
+<button mat-fab title="Conferir números sorteados" (click)="mostrarSorteados()" id="botao-numeros-sorteados"><mat-icon id="icone-numeros-sorteados">dashboard</mat-icon></button>
