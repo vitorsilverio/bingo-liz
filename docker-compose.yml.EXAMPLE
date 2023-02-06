@@ -1,0 +1,32 @@
+services:
+    db:
+        image: postgres
+        volumes:
+            - ./data:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_PASSWORD=Sup3rS3cr3tP4ss
+        restart: unless-stopped
+
+    frontend:
+        image: vitorsilverio/bingoliz-frontend:master
+        ports:
+            - "8001:80"
+        restart: unless-stopped
+
+    backend:
+        image: vitorsilverio/bingoliz-backend:master
+        depends_on:
+            - db
+        environment:
+            - DB_URL=jdbc:postgresql://db:5432/bingoliz
+            - DB_USER=postgres
+            - DB_PASS=Sup3rS3cr3tP4ss
+            - FRONTEND_URI=https://bingoliz.vitorsilverio.dev
+            - JWT_SECRET=6B5970337336763979244226452948404D6251655468576D5A7134743777217A
+            - 
+            - BACKEND_CONTEXT=/api
+        ports:
+            - "8002:8080"
+        links:
+            - db
+        restart: unless-stopped
